@@ -7,5 +7,6 @@ dependencies = [
     "fastapi>=0.162.0",
     "mistralai>=3.7.0",
     "python-dotenv>=1.2.4",
+    "python-multipart>=0.0.33",
     "uvicorn[standard]>=0.54.0",
 ]

@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Receipt Extractor</title>
+<style>
+  :root { --bg: #f7f7f5; --text: #15151a; --muted: #5c5c66; --accent: #e8590c; --line: #d9d9d4; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text);
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; overflow: hidden; }
+  .slide { position: absolute; inset: 0; visibility: hidden; display: flex; flex-direction: column;
+    padding: 5vh 6vw; }
+  .slide.active { visibility: visible; }
+  .label { color: var(--accent); text-transform: uppercase; font-weight: 700; font-size: 24px;
+    letter-spacing: 2px; }
+  .middle { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  h1 { font-size: 56px; line-height: 1.15; margin: 0 0 40px; max-width: 22ch; }
+  ul { margin: 0; padding-left: 1.1em; }
+  li { font-size: 30px; line-height: 1.4; margin-bottom: 18px; color: var(--text); }
+  li::marker { color: var(--accent); }
+  .split { display: grid; grid-template-columns: 1fr 1.1fr; gap: 4vw; align-items: center; }
+  .split h1 { font-size: 48px; }
+  .diagram { font-size: 22px; }
+  .fallback { font-size: 22px; color: var(--muted); line-height: 1.6; }
+  .diagram:has(svg) .fallback { display: none; }
+  .big { font-size: 96px; margin-bottom: 24px; }
+  .value { font-size: 36px; color: var(--muted); max-width: 30ch; margin: 0 0 32px; }
+  .q { font-size: 48px; color: var(--accent); font-weight: 600; }
+  footer { display: flex; justify-content: space-between; align-items: center; font-size: 20px;
+    color: var(--muted); border-top: 1px solid var(--line); padding-top: 16px; }
+  .steps span { margin-left: 24px; }
+  .steps .on { color: var(--accent); font-weight: 700; }
+  .counter { position: fixed; right: 6vw; top: 5vh; font-size: 20px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<section class="slide active">
+  <div class="label">The problem</div>
+  <div class="middle">
+    <h1>Receipts are still typed in by hand</h1>
+    <ul>
+      <li>For example, a team with 300 receipts a month retypes every vendor, date and line</li>
+      <li>Slow, repetitive work that nobody wants to do</li>
+      <li>Typos slip into the books and are found late</li>
+    </ul>
+  </div>
+  <footer><span>Receipt Extractor</span><span class="steps"><span class="on">Problem</span><span>Solution</span><span>What I built</span><span>Next steps</span></span></footer>
+</section>
+
+<section class="slide">
+  <div class="label">Our solution</div>
+  <div class="middle">
+    <h1>A tool that reads receipt images so your team can check instead of type</h1>
+    <ul>
+      <li>Faster: for example, 300 receipts × 3 minutes saved ≈ 15 hours a month</li>
+      <li>Consistent: the same fields, in the same format, every time</li>
+      <li>Ready to use: export straight to a spreadsheet</li>
+    </ul>
+  </div>
+  <footer><span>Receipt Extractor</span><span class="steps"><span>Problem</span><span class="on">Solution</span><span>What I built</span><span>Next steps</span></span></footer>
+</section>
+
+<section class="slide">
+  <div class="label">What I built</div>
+  <div class="middle split">
+    <div>
+      <h1>Let me show you</h1>
+      <ul>
+        <li>Upload a receipt image, get vendor, date, total and line items</li>
+        <li>Correct any field right on screen</li>
+        <li>Export to CSV, with your corrections</li>
+      </ul>
+    </div>
+    <div class="diagram">
+      <pre class="mermaid">
+flowchart TD
+  A["Receipt photo"] --> B["Mistral OCR reads the text and tables"]
+  B --> C["Mistral Small fills a fixed form: vendor, date, total, items"]
+  C --> D["Person reviews and edits"]
+  D --> E["CSV for your spreadsheet"]
+  classDef key fill:#e8590c,color:#fff,stroke:#e8590c
+  class C key
+      </pre>
+      <div class="fallback">Receipt photo → Mistral OCR reads the text and tables → Mistral Small fills a fixed form → Person reviews and edits → CSV</div>
+    </div>
+  </div>
+  <footer><span>Receipt Extractor</span><span class="steps"><span>Problem</span><span>Solution</span><span class="on">What I built</span><span>Next steps</span></span></footer>
+</section>
+
+<section class="slide">
+  <div class="label">Next steps</div>
+  <div class="middle">
+    <h1>From demo to daily use</h1>
+    <ul>
+      <li>Today: one image at a time, no PDFs yet</li>
+      <li>For production: PDFs and batches, security review, accuracy testing, cost controls</li>
+      <li>The ask: a 2 to 4 week pilot on your real receipts</li>
+    </ul>
+  </div>
+  <footer><span>Receipt Extractor</span><span class="steps"><span>Problem</span><span>Solution</span><span>What I built</span><span class="on">Next steps</span></span></footer>
+</section>
+
+<section class="slide">
+  <div class="label">Thank you</div>
+  <div class="middle">
+    <h1 class="big">Thank you</h1>
+    <p class="value">Receipts into your spreadsheet in seconds, with a person still checking every number.</p>
+    <p class="q">Questions?</p>
+  </div>
+  <footer><span>Receipt Extractor</span><span class="steps"><span>Problem</span><span>Solution</span><span>What I built</span><span>Next steps</span></span></footer>
+</section>
+
+<div class="counter" id="counter"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ startOnLoad: true, theme: 'neutral', themeVariables: { fontSize: '20px' } })
+  }
+  const slides = document.querySelectorAll('.slide')
+  const counter = document.getElementById('counter')
+  let i = 0
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n))
+    slides.forEach((s, j) => s.classList.toggle('active', j === i))
+    counter.textContent = `${i + 1} / ${slides.length}`
+  }
+  document.addEventListener('keydown', (e) => {
+    if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(e.key)) { e.preventDefault(); show(i + 1) }
+    if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); show(i - 1) }
+  })
+  show(0)
+</script>
+</body>
+</html>

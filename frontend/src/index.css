@@ -54,7 +54,6 @@
   width: 1126px;
   max-width: 100%;
   margin: 0 auto;
-  text-align: center;
   border-inline: 1px solid var(--border);
   min-height: 100svh;
   display: flex;
@@ -74,13 +73,9 @@ h2 {
 }
 
 h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
+  font-size: 32px;
+  letter-spacing: -0.5px;
+  margin: 0 0 4px;
 }
 h2 {
   font-size: 24px;
@@ -108,4 +103,105 @@ code {
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);
+}
+
+/* Receipt extractor */
+main {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.status {
+  font-size: 14px;
+}
+
+.error {
+  color: #dc2626;
+}
+
+.upload {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+button {
+  font: inherit;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.fields {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.fields label {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  align-items: center;
+  color: var(--text-h);
+}
+
+input:not([type='file']) {
+  font: inherit;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--text-h);
+  padding: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.num {
+  width: 110px;
+  text-align: right;
+}
+
+.num input {
+  text-align: right;
 }
